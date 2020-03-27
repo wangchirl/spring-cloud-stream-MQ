@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /rocketmq
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: localhost:9876 # brocker服务器地址
+      bindings:
+        output: # 可以自定义-RocketMQSource
+          destination: rocketmq-topic # topic
+          content-type: application/json # 数据格式
+        input: # 可以自定义-RocketMQSink
+          destination: rocketmq-topic # topic
+          content-type: application/json # 数据格式
+          group: test-group # 必须指定group

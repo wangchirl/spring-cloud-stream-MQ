@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /rabbitmq
+spring:
+  cloud:
+    stream:
+      bindings:
+        input: # 自定义 - RocketMQSink
+          destination: default.messages # exchange
+          binder: local_rabbit
+        output: # 自定义 - RocketMQSource
+          destination: default.messages # exchange
+          binder: local_rabbit
+      binders:
+        local_rabbit:
+          type: rabbit # 指定MQ类型
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost # rabbitMQ服务地址
+                port: 5672 # rabbitMQ服务端口
+                username: guest # rabbitMQ用户名称
+                password: guest # rabbitMQ用户密码
